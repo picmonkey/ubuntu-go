@@ -40,7 +40,7 @@ RUN cd /tmp && git clone --depth 1 https://github.com/jcupitt/libvips.git \
     && ./bootstrap.sh \
     && ./configure --enable-debug=no --without-python --without-fftw \
       --without-libexif --without-libgf --without-little-cms --without-orc \
-      --without-pango --prefix=/usr
+      --without-pango --prefix=/usr \
     && make \
     && sudo make install \
     && sudo ldconfig
