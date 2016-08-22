@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y \
 		autoconf \
@@ -37,21 +37,21 @@ RUN apt-get install -y automake \
     gtk-doc-tools
 RUN cd /tmp && git clone --depth 1 https://github.com/jcupitt/libvips.git \
     && cd libvips \
-    && ./bootstrap.sh \
+    && ./autogen.sh \
     && ./configure --enable-debug=no --without-python --without-fftw \
       --without-libexif --without-libgf --without-little-cms --without-orc \
       --without-pango --prefix=/usr \
     && make \
-    && sudo make install \
-    && sudo ldconfig
+    && make install \
+    && ldconfig
 
 # Go
-ENV GOLANG_VERSION 1.5
+ENV GOLANG_VERSION 1.6.3
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA1 5817fa4b2252afdb02e11e8b9dc1d9173ef3bd5a
+ENV GOLANG_DOWNLOAD_SHA256 cdde5e08530c0579255d6153b08fdb3b8e47caabbe717bc7bcd7561275a87aeb
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
-	&& echo "$GOLANG_DOWNLOAD_SHA1  golang.tar.gz" | sha1sum -c - \
+	&& echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
 	&& tar -C /usr/local -xzf golang.tar.gz \
 	&& rm golang.tar.gz
 
