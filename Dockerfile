@@ -39,7 +39,7 @@ RUN cd /tmp && git clone --depth 1 https://github.com/jcupitt/libvips.git \
     && cd libvips \
     && ./autogen.sh \
     && ./configure --enable-debug=no --without-python --without-fftw \
-      --without-libexif --without-libgf --without-little-cms --without-orc \
+      --without-libgf --without-little-cms --without-orc \
       --without-pango --prefix=/usr \
     && make \
     && make install \
